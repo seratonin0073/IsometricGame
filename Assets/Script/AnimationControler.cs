@@ -8,12 +8,12 @@ public class AnimationControler : MonoBehaviour
 
     public static readonly string[] staticDirection =
     {
-        "StaticN", "StaticNE", "StaticE","StaticSE", "StaticS", "StaticSW","StaticW", "StaticNW"
+        "StaticN", "StaticNW", "StaticE","StaticSW", "StaticS", "StaticSE","StaticE", "StaticNE"
     };
 
     public static readonly string[] runDirection =
     {
-        "RunN", "RunNE", "RunE","RunSE", "RunS", "RunSW","RunW", "RunNW"
+        "RunN", "RunNW", "RunW","RunSW", "RunS", "RunSE","RunE", "RunNE"
     };
 
     Animator anim;
