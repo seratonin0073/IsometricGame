@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collider
+  - Blast
   layers:
   - Default
   - TransparentFX

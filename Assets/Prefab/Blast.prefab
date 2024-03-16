@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1881772251354324229}
   - component: {fileID: 1881772251354324228}
   - component: {fileID: 4542183387872952613}
+  - component: {fileID: 7155715641385950502}
   m_Layer: 0
   m_Name: Blast
-  m_TagString: Untagged
+  m_TagString: Blast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,3 +143,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blastSpeed: 20
+--- !u!58 &7155715641385950502
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881772251354324231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.057142857
