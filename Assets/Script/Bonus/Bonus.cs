@@ -6,7 +6,7 @@ using TMPro;
 public class Bonus : MonoBehaviour
 {
     private static TMP_Text bonusText;
-    private static int score;
+    public static int score;
 
     private void Start()
     {
@@ -21,7 +21,8 @@ public class Bonus : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             score++;
-            bonusText.text = score.ToString();
+            //int maxScore = JewelSpawner.jewelMaxQuantity;
+            //bonusText.text = $"{score}/{maxScore}";
             Destroy(gameObject);
         }
     }
