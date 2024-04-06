@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public GameObject target;
     public int health = 5;
     public Slider hpBar;
+    public float agrRadius = 3f;
 
     void Start()
     {
@@ -18,11 +19,11 @@ public class Enemy : MonoBehaviour
         hpBar.value = health;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float distance = Vector2.Distance(transform.position, target.transform.position);
 
-        if(distance < 3f)
+        if(distance < agrRadius)
         {
             patrol.enabled = false;
             destinator.enabled = true;
@@ -58,5 +59,11 @@ public class Enemy : MonoBehaviour
     private void SetWhiteColor()
     {
         transform.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, agrRadius);
     }
 }

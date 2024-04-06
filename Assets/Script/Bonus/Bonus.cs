@@ -5,24 +5,29 @@ using TMPro;
 
 public class Bonus : MonoBehaviour
 {
-    private static TMP_Text bonusText;
-    public static int score;
-
     private void Start()
     {
-        if(bonusText == null)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.01f);
+
+        while(colliders.Length < 2)
         {
-            bonusText = GameObject.Find("BonusScoreText").GetComponent<TMP_Text>();
-            score = 0;
+            Vector2 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+            Vector2 topRight = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+            float x = Random.Range(bottomLeft.x, topRight.x);
+            float y = Random.Range(bottomLeft.y, topRight.y);
+
+            Vector3 position = new Vector3(x, y, 0);
+            transform.position = position;
+            colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            score++;
-            //int maxScore = JewelSpawner.jewelMaxQuantity;
-            //bonusText.text = $"{score}/{maxScore}";
+            JewelSpawner.jewelCounter++;
             Destroy(gameObject);
         }
     }
