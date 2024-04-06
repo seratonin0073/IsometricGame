@@ -9,6 +9,7 @@ public class Shoot : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayBlasterShoot();
             Instantiate(blast, transform.GetChild(0).position, transform.rotation);
         }
     }

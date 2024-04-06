@@ -18,6 +18,7 @@ public class PlayerSettings : MonoBehaviour
 
     public void Damage(Vector3 enemyPos)
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayPlayerDamage();
         health--;
         Vector2 impulse = enemyPos - transform.position;
         //GetComponent<Rigidbody2D>().AddForce(impulse * 100f, ForceMode2D.Impulse);
@@ -26,6 +27,7 @@ public class PlayerSettings : MonoBehaviour
         Debug.LogError(rb.name);
         if(health <= 0)
         {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayPlayerDeath();
             Application.LoadLevel(0);
         }
         healthBar.sprite = healthImage[health];

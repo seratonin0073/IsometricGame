@@ -8,27 +8,37 @@ public class Enemy : MonoBehaviour
 {
     public Patrol patrol;
     public AIDestinationSetter destinator;
-    public GameObject target;
     public int health = 5;
     public Slider hpBar;
     public float agrRadius = 3f;
 
+    private GameObject patrolPoints;
+    private GameObject target;
+    private bool isDead = false;
+    private Animator anim;
+
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
+        patrolPoints = GameObject.FindGameObjectWithTag("PatrolPoints");
+        patrol.targets = patrolPoints.GetComponentsInChildren<Transform>();
+        destinator.target = target.transform;
+
         hpBar.maxValue = health;
         hpBar.value = health;
+        anim = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
     {
         float distance = Vector2.Distance(transform.position, target.transform.position);
 
-        if(distance < agrRadius)
+        if(distance < agrRadius && !isDead)
         {
             patrol.enabled = false;
             destinator.enabled = true;
         }
-        else
+        else if(distance >= agrRadius && !isDead)
         {
             patrol.enabled = true;
             destinator.enabled = false;
@@ -51,10 +61,17 @@ public class Enemy : MonoBehaviour
             Invoke("SetWhiteColor", 0.2f);
             if(health <= 0)
             {
-                Destroy(gameObject);
+                isDead = true;
+                patrol.enabled = false;
+                destinator.enabled = false;
+                GetComponent<AIPath>().canMove = false;
+                GetComponent<Collider2D>().enabled = false;
+                GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayEnemyDeath();
+                anim.Play("Death");
             }
         }
     }
+
 
     private void SetWhiteColor()
     {

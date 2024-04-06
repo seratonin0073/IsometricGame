@@ -27,6 +27,7 @@ public class Bonus : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayJewelCollected();
             JewelSpawner.jewelCounter++;
             Destroy(gameObject);
         }

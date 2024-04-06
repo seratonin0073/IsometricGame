@@ -7,6 +7,7 @@ public class JewelSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject jewel;//префаб коштовності
     [SerializeField] private GameObject victoryPanel;//панель пермоги
+    [SerializeField] private float spawnRate = 5f;//час в секундах як часто спавняться коштовності
 
     private TMP_Text bonusText;//текст який показує поточну кількість коштовностей
     private int jewelMaxQuantity;//максимальна кількість коштовностей
@@ -16,11 +17,12 @@ public class JewelSpawner : MonoBehaviour
 
     void Start()
     {
+        jewelCounter = 0;
         bonusText = GameObject.Find("BonusScoreText").GetComponent<TMP_Text>();
 
         jewelMaxQuantity = Random.RandomRange(5, 30);
-        
-        StartCoroutine("Spawn");
+
+        InvokeRepeating("Spawn", spawnRate, spawnRate);
         victoryPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -30,23 +32,20 @@ public class JewelSpawner : MonoBehaviour
         bonusText.text = $"{jewelCounter}/{jewelMaxQuantity}";
         if(jewelCounter >= jewelMaxQuantity)
         {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayLevelCompleted();
             Time.timeScale = 0;
             victoryPanel.SetActive(true);
         }
     }
 
-    IEnumerator Spawn()
+    private void Spawn()
     {
-        for (int i = 0; i < jewelMaxQuantity; i++)
-        {
-            Vector2 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-            Vector2 topRight = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+        Vector2 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 topRight = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-            float x = Random.Range(bottomLeft.x, topRight.x);
-            float y = Random.Range(bottomLeft.y, topRight.y);
+        float x = Random.Range(bottomLeft.x, topRight.x);
+        float y = Random.Range(bottomLeft.y, topRight.y);
 
-            Instantiate(jewel, new Vector3(x, y, 0), Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
-        }
+        Instantiate(jewel, new Vector3(x, y, 0), Quaternion.identity);
     }
 }
