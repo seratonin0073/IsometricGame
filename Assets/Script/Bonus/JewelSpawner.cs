@@ -20,7 +20,7 @@ public class JewelSpawner : MonoBehaviour
         jewelCounter = 0;
         bonusText = GameObject.Find("BonusScoreText").GetComponent<TMP_Text>();
 
-        jewelMaxQuantity = Random.RandomRange(5, 30);
+        jewelMaxQuantity = Random.RandomRange(20, 50);
 
         InvokeRepeating("Spawn", spawnRate, spawnRate);
         victoryPanel.SetActive(false);

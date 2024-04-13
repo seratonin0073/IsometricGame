@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         spawnPointsQuantity = transform.childCount;
-        InvokeRepeating("EnemySpawn", spawnRate, spawnRate);
+        InvokeRepeating("EnemySpawn", 10/spawnRate, 10/spawnRate);
     }
 
     private void EnemySpawn()

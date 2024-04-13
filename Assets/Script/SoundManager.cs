@@ -15,23 +15,22 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBlasterShoot()
     {
-        audioClip.PlayOneShot(blasterShoot);
+        StartCoroutine(PlaySound(blasterShoot, blasterShoot.length));
     }
 
     public void PlayButtonClick()
     {
-        audioClip.PlayOneShot(buttonClick);
+        StartCoroutine(PlaySound(buttonClick, buttonClick.length));
     }
 
     public void PlayEnemyDeath()
     {
-        audioClip.PlayOneShot(enemyDeath);
-        
+        StartCoroutine(PlaySound(enemyDeath, enemyDeath.length));
     }
 
     public void PlayJewelCollected()
     {
-        audioClip.PlayOneShot(jewelCollected);
+        StartCoroutine(PlaySound(jewelCollected, jewelCollected.length));
     }
 
     public void PlayLevelCompleted()
@@ -41,11 +40,21 @@ public class SoundManager : MonoBehaviour
 
     public void PlayPlayerDamage()
     {
-        audioClip.PlayOneShot(playerDamage);
+        StartCoroutine(PlaySound(playerDamage, playerDamage.length));
     }
 
     public void PlayPlayerDeath()
     {
-        audioClip.PlayOneShot(playerDeath);
+        StartCoroutine(PlaySound(playerDeath, playerDeath.length));
+    }
+
+    IEnumerator PlaySound(AudioClip audioClip, float time)
+    {
+        AudioSource audio = gameObject.AddComponent<AudioSource>();
+        audio.clip = audioClip;
+        audio.pitch = Random.Range(0.9f, 1.1f);
+        audio.Play();
+        yield return new WaitForSeconds(time);
+        Destroy(audio);
     }
 }

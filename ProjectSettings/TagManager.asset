@@ -8,6 +8,7 @@ TagManager:
   - Blast
   - PatrolPoints
   - SoundManager
+  - Ground
   layers:
   - Default
   - TransparentFX

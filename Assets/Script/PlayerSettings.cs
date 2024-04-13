@@ -24,7 +24,6 @@ public class PlayerSettings : MonoBehaviour
         //GetComponent<Rigidbody2D>().AddForce(impulse * 100f, ForceMode2D.Impulse);
         transform.Translate(-impulse * 3f);
         //rb.AddForce(-impulse*100f, ForceMode2D.Impulse);
-        Debug.LogError(rb.name);
         if(health <= 0)
         {
             GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayPlayerDeath();
